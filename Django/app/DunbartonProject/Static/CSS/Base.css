@@ -1,0 +1,38 @@
+html{
+  height: 100%;
+}
+body{
+  height: 100%;
+}
+.WholeBodyDiv{
+  padding: 0px;
+  height: 100%;
+  background-color: #3d3d3d;
+}
+.BrandImage{
+  width: 80px;
+}
+.NavbarDiv{
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  min-height: 78px;
+  overflow: hidden;
+}
+.MainContentDiv{
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.Footer{
+  background-color: #212529;
+  font-size: 0.8vw;
+  text-align: center;
+  color: #fffff0;
+  bottom: 0;
+}
+.Footer p {
+  margin: 0px 0;
+  padding-top: 0.2%;
+  padding-bottom: 0.2%;
+}
