@@ -1,0 +1,81 @@
+.ScanArea{
+  height: 100%;
+}
+.ScanAreaRow{
+  align-items: center;
+  margin: 0 auto;
+}
+.NonLoadAreaDiv{
+  background-color: #28282B;
+  border-radius: 1%;
+  border: 2px solid #212529;
+}
+.LoadAreaDiv{
+  padding-left: 2.5vw;
+}
+hr{
+  color:#A9A9A9;
+}
+.LeftHandSideText{
+  font-size: 1vw;
+  text-align: center;
+  color: #e8eaed;
+}
+.WorkOrderTableDiv{
+  overflow-y: scroll;
+  background-color: #333333;
+  max-height: 25.5vw;
+  min-height: 25.5vw;
+  margin-bottom: 2%;
+  padding: 2%;
+  font-size: 1vw;
+  color: white;
+}
+.ManualWorkOrderNumberDiv{
+  padding: 0px;
+  margin-bottom: 1%;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 2%;
+}
+.AddManualWONInput{
+  width: 100%;
+  max-height: 100%;
+  font-size: 1vw;
+}
+.AddManualWONbutton{
+  width: 100%;
+  height:100%;
+  max-height: 100%;
+  font-size: 1vw;
+}
+.SelectAllDiv{
+  padding: 0px;
+  margin-bottom: 2%;
+}
+.SelectAllButtonDiv{
+  margin-top: 2%;
+  padding: 0px
+}
+.SelectAllButton{
+  width: 100%;
+  font-size: 1vw;
+}
+.StagingAreaBoxDiv{
+  background-color:#A9A9A9;
+  height:1.8vw;
+  width: 26vw;
+  align-content: center;
+}
+.StagingAreaText{
+  font-size: 1vw;
+}
+.asteriskField {
+  display: none;
+}
+.form-row{
+  margin-bottom:2%;
+}
+SubmitButtonModal{
+  padding-right: 0px;
+}

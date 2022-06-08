@@ -1,38 +1,49 @@
-html{
+html {
+  height: 100%;
+  background-color: #212529;
+}
+
+body {
   height: 100%;
 }
-body{
-  height: 100%;
-}
-.WholeBodyDiv{
+
+.WholeBodyDiv {
   padding: 0px;
   height: 100%;
-  background-color: #3d3d3d;
+  display: flex;
+  flex-flow: column;
 }
-.BrandImage{
+
+.BrandImage {
   width: 80px;
 }
-.NavbarDiv{
-  margin-top: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  min-height: 78px;
-  overflow: hidden;
-}
-.MainContentDiv{
+
+.NavbarDiv {
+  flex: 0 0 auto;
   margin-top: 0px;
   margin-left: 0px;
   margin-right: 0px;
 }
-.Footer{
+
+.MainContentDiv {
+  flex: 1 1 auto;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: #3d3d3d;
+}
+
+.Footer {
+  flex: 1 1 auto;
   background-color: #212529;
   font-size: 0.8vw;
   text-align: center;
   color: #fffff0;
-  bottom: 0;
+  min-width: 100%;
+  width:100%;
 }
+
 .Footer p {
-  margin: 0px 0;
-  padding-top: 0.2%;
-  padding-bottom: 0.2%;
+  padding-top: 0.5%;
+  margin: 0 auto;
 }

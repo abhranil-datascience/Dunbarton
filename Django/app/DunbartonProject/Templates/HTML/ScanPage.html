@@ -1,0 +1,335 @@
+{% extends 'HTML/Base.html' %}
+{% load crispy_forms_tags %}
+{% block maincontentblock %}
+<div class="ScanArea container-fluid">
+  <div class="row h-100 ScanAreaRow container-fluid">
+    <div class="col-5 NonLoadAreaDiv container-fluid">
+      <hr>
+      <p class="LeftHandSideText">Work Order Numbers</p>
+      <hr>
+      <div class="WorkOrderTableDiv container" id="WorkOrderTableDiv">
+        {% if unassigned_id %}
+          {% for won in unassigned_id %}
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id={{won}} onclick="AddWonToAssignedWorkOrderNumbers({{won}})">
+              <label class="form-check-label" for={{won}}>{{won|slice:"1:"}}</label>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div class="ManualWorkOrderNumberDiv container-fluid">
+        <form class="form-inline">
+          <div class="form-group row" style="margin-left:0px;margin-right:0px">
+            <div class="col-9" style="padding-left:0px;padding-right:1%;">
+              <input type="text" class="form-control AddManualWONInput" id="AddManualWONInput" placeholder="Enter Work Order Number">
+            </div>
+            <div class="col-3" style="padding-right:0px;padding-left:0px;">
+              <button type="button" class="btn btn-sm btn-secondary AddManualWONbutton" onclick="addWonManually()">Add</button>
+            </div>
+        </form>
+      </div>
+    </div>
+    <div class="SelectAllDiv container-fluid">
+      <button type="button" class="btn btn-secondary btn-lg btn-block SelectAllButton" onclick="addAllWon()">Select All</button>
+    </div>
+  </div>
+  <div class="col-7 LoadAreaDiv container-fluid">
+    <div class="StagingAreaBoxes">
+      <div class="StagingAreaTables">
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 1A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 1A</p>
+                </a>
+                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Load Area 1A</button> -->
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 1B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 1B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 2A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 2A</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 2B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 2B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 3A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 3A</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 3B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 3B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 4A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 4A</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 4B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 4B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 5A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 5A</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 5B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 5B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 6A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 6A</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 6B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 6B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 7A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 7A</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 7B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 7B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 8A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 8A</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 8B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 8B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 9A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 9A</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 9B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 9B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 10A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 10A</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 10B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 10B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 11A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 11A</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 11B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 11B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 12A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 12A</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Load Area 12B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Load Area 12B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Auxillary Area A 1')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Auxillary Area A 1</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Auxillary Area A 2')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Auxillary Area A 2</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Auxillary Area B 1')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Auxillary Area B 1</p>
+                </a>
+              </div>
+            </td>
+            <td class="block StagingAreaBoxes" style="text-align: center;">
+              <div class="StagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AddLoadAreaFunction('Auxillary Area B 2')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="StagingAreaText" style="text-align: center;">Auxillary Area B 2</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Enter ID</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'ScanPageFunction' %}" role="form" method="post">
+          {% csrf_token %}
+          {% crispy assign_form %}
+        </form
+      </div>
+      <!-- <div class="modal-footer" style="padding:0px;">
+        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right:0px">Submit</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  left_wons = document.getElementsByName('unassigned_wons')[0].getAttribute('content')
+  document.getElementById('id_AllWorkOrderNumbers').value = left_wons
+  user_id = document.getElementsByName('user_id')[0].getAttribute('content')
+  document.getElementById('id_ID').value = user_id
+</script>
+{% endblock %}
