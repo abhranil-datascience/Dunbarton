@@ -11,7 +11,7 @@ function addWonManually()
   else{
     // On new entry add it Work Order Numbers Div
     var CurrentWonDiv = document.getElementById('WorkOrderTableDiv').innerHTML
-    CurrentWonDiv = CurrentWonDiv+'<div class="form-check"><input class="form-check-input" type="checkbox" value="" id='+mod_won+' onclick="AddWonToAssignedWorkOrderNumbers('+mod_won+')"><label class="form-check-label" for='+mod_won+'>'+Won+'</label></div>'
+    CurrentWonDiv = CurrentWonDiv+'<div class="form-check"><input class="form-check-input WonCheckbox" type="checkbox" value="" id='+mod_won+' onclick="AddWonToAssignedWorkOrderNumbers('+mod_won+')"><label class="form-check-label" for='+mod_won+'>'+Won+'</label></div>'
     document.getElementById('WorkOrderTableDiv').innerHTML = CurrentWonDiv
 
     // Add each Won to modal form
@@ -114,8 +114,16 @@ function AddWonToAssignedWorkOrderNumbers(CurrentWon){
   }
 }
 function AddLoadAreaFunction(LoadArea){
-  // Set LoadArea field in Modal form
-  document.getElementById('id_LoadArea').value = LoadArea
+  GetAssignedWons = document.getElementById('id_AssignedWorkOrderNumbers').value
+  if (GetAssignedWons == ""){
+    document.getElementById('submit-id-submit').disabled = true
+  }
+  else{
+    // Set LoadArea field in Modal form
+    document.getElementById('submit-id-submit').disabled = false
+    document.getElementById('id_LoadArea').value = LoadArea
+  }
+
 }
 function addAllWon(){
   ModalAllWonFieldValues = document.getElementById('id_AllWorkOrderNumbers').value
@@ -135,4 +143,61 @@ function addAllWon(){
     }
   }
   document.getElementById('id_AssignedWorkOrderNumbers').value = ModalAssignedFieldValues
+}
+function SetFocus(){
+  text_area = document.getElementById('ScanInput')
+  but = document.getElementById('ScanButton')
+  if (but.style.backgroundColor != 'red'){
+    but.style.backgroundColor = 'red'
+    but.innerText = 'Stop Scan'
+    document.getElementById('AddManualWONInput').disabled = true
+    document.getElementById('AddManualWONbutton').disabled = true
+    document.getElementById('SelectAllButton').disabled = true
+    document.getElementById('submit-id-submit').disabled = true
+    document.getElementById('StagingAreaTables').style.pointerEvents = "none"
+  }
+  else{
+    but.style.backgroundColor = '#6c757d'
+    but.innerText = 'Scan'
+    document.getElementById('AddManualWONInput').disabled = false
+    document.getElementById('AddManualWONbutton').disabled = false
+    document.getElementById('SelectAllButton').disabled = false
+    document.getElementById('submit-id-submit').disabled = false
+    document.getElementById('StagingAreaTables').style.pointerEvents = "auto"
+  }
+  text_area.focus()
+}
+function readScanCode(e){
+  if (e.keyCode == 13) {
+    scanned_won = document.getElementById('ScanInput').value
+    document.getElementById('ScanInput').value = ""
+    console.log(scanned_won)
+    var mod_won = "_"+scanned_won
+
+    var CurrentWonDiv = document.getElementById('WorkOrderTableDiv').innerHTML
+    CurrentWonDiv = CurrentWonDiv+'<div class="form-check"><input class="form-check-input WonCheckbox" type="checkbox" value="" id='+mod_won+' onclick="AddWonToAssignedWorkOrderNumbers('+mod_won+')"><label class="form-check-label" for='+mod_won+'>'+scanned_won+'</label></div>'
+    document.getElementById('WorkOrderTableDiv').innerHTML = CurrentWonDiv
+
+    // Add each Won to modal form
+    var AllWons = document.getElementById('id_AllWorkOrderNumbers').value
+    if (AllWons==""){
+      AllWons = mod_won
+    }
+    else{
+      AllWons = AllWons+"||"+mod_won
+    }
+    document.getElementById('id_AllWorkOrderNumbers').value = AllWons
+
+    // Copy state from meta variable
+    var MetaWon = document.getElementsByName('MetaWon')[0].getAttribute('content')
+    if (!MetaWon==""){
+      MetaWonArray = MetaWon.split('||')
+      for(var i = 0; i < MetaWonArray.length; i++){
+        curr_won = MetaWonArray[i]
+        curr_checkbox = document.getElementById(curr_won)
+        curr_checkbox.checked = true
+      }
+    }
+
+  }
 }
