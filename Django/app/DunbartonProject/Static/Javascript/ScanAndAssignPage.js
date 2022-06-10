@@ -11,20 +11,23 @@ function addWonManually()
   }
   else
   {
-    // On new entry add it Work Order Numbers Div
-    var CurrentWonDiv = document.getElementById('WorkOrderTableDiv').innerHTML
-    CurrentWonDiv = CurrentWonDiv+'<div class="form-check"><input class="form-check-input WonCheckbox" type="checkbox" value="" id='+mod_won+' onclick="AddWonToAssignedWorkOrderNumbers('+mod_won+')"><label class="form-check-label" for='+mod_won+'>'+Won+'</label></div>'
-    document.getElementById('WorkOrderTableDiv').innerHTML = CurrentWonDiv
-
-    // Add each Won to modal form
     var AllWons = document.getElementById('id_AllWorkOrderNumbers').value
-    if (AllWons==""){
-      AllWons = mod_won
+    const AllWonsAplitted = AllWons.split("||")
+    if (!AllWonsAplitted.includes(mod_won))
+    {
+      // On new entry add it Work Order Numbers Div
+      var CurrentWonDiv = document.getElementById('WorkOrderTableDiv').innerHTML
+      CurrentWonDiv = CurrentWonDiv+'<div class="form-check"><input class="form-check-input WonCheckbox" type="checkbox" value="" id='+mod_won+' onclick="AddWonToAssignedWorkOrderNumbers('+mod_won+')"><label class="form-check-label" for='+mod_won+'>'+Won+'</label></div>'
+      document.getElementById('WorkOrderTableDiv').innerHTML = CurrentWonDiv
+      // Add each Won to modal form
+      if (AllWons==""){
+        AllWons = mod_won
+      }
+      else{
+        AllWons = AllWons+"||"+mod_won
+      }
+      document.getElementById('id_AllWorkOrderNumbers').value = AllWons
     }
-    else{
-      AllWons = AllWons+"||"+mod_won
-    }
-    document.getElementById('id_AllWorkOrderNumbers').value = AllWons
   }
 }
 // Function to Add Won Automatically
@@ -57,20 +60,23 @@ function readScanCode(e){
     document.getElementById('ScanInput').value = ""
     console.log(scanned_won)
     var mod_won = "_"+scanned_won
-
-    var CurrentWonDiv = document.getElementById('WorkOrderTableDiv').innerHTML
-    CurrentWonDiv = CurrentWonDiv+'<div class="form-check"><input class="form-check-input WonCheckbox" type="checkbox" value="" id='+mod_won+' onclick="AddWonToAssignedWorkOrderNumbers('+mod_won+')"><label class="form-check-label" for='+mod_won+'>'+scanned_won+'</label></div>'
-    document.getElementById('WorkOrderTableDiv').innerHTML = CurrentWonDiv
-
-    // Add each Won to modal form
     var AllWons = document.getElementById('id_AllWorkOrderNumbers').value
-    if (AllWons==""){
-      AllWons = mod_won
+    const AllWonsAplitted = AllWons.split("||")
+    if (!AllWonsAplitted.includes(mod_won))
+    {
+      var CurrentWonDiv = document.getElementById('WorkOrderTableDiv').innerHTML
+      CurrentWonDiv = CurrentWonDiv+'<div class="form-check"><input class="form-check-input WonCheckbox" type="checkbox" value="" id='+mod_won+' onclick="AddWonToAssignedWorkOrderNumbers('+mod_won+')"><label class="form-check-label" for='+mod_won+'>'+scanned_won+'</label></div>'
+      document.getElementById('WorkOrderTableDiv').innerHTML = CurrentWonDiv
+
+      // Add each Won to modal form
+      if (AllWons==""){
+        AllWons = mod_won
+      }
+      else{
+        AllWons = AllWons+"||"+mod_won
+      }
+      document.getElementById('id_AllWorkOrderNumbers').value = AllWons
     }
-    else{
-      AllWons = AllWons+"||"+mod_won
-    }
-    document.getElementById('id_AllWorkOrderNumbers').value = AllWons
   }
 }
 // Function to add or remove clicked WONs in modal form

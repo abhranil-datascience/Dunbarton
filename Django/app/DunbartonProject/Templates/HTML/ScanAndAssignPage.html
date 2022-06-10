@@ -323,7 +323,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="{% url 'ScanPageFunction' %}" role="form" method="post">
+        <form action="{% url 'ScanAndAssignPageFunction' %}" role="form" method="post">
           {% csrf_token %}
           {% crispy assign_form %}
         </form
@@ -332,8 +332,6 @@
   </div>
 </div>
 <script type="text/javascript">
-  role = document.getElementsByName('role')[0].getAttribute('content')
-  document.getElementById('id_Role').value = role
   user_id = document.getElementsByName('user_id')[0].getAttribute('content')
   document.getElementById('id_ID').value = user_id
   document.getElementById('id_AllWorkOrderNumbers').value = document.getElementsByName('all_unassigned_wons')[0].getAttribute('content')

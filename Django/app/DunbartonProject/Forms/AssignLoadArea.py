@@ -10,10 +10,11 @@ class AssignLoadAreaForm(forms.Form):
     LoadArea = forms.CharField(widget = forms.HiddenInput(),max_length=200, required=True)
     # LoadArea = forms.CharField(max_length=200, required=True)
     ID = forms.CharField(label="ID", max_length=200, required=True)
-    Role = forms.ChoiceField(label='Role', choices = (("E","Employee"),("A","Auditor")), required=True, initial="Employee")
+    # Role = forms.ChoiceField(label='Role', choices = (("E","Employee"),("A","Auditor")), required=True, initial="Employee")
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-        Row('AssignedWorkOrderNumbers','AllWorkOrderNumbers','LoadArea','ID','Role', css_class='form-row'),
+        # Row('AssignedWorkOrderNumbers','AllWorkOrderNumbers','LoadArea','ID','Role', css_class='form-row'),
+        Row('AssignedWorkOrderNumbers','AllWorkOrderNumbers','LoadArea','ID', css_class='form-row'),
         Submit('submit', 'Submit', css_class='btn btn-secondary SubmitButtonModal'))
