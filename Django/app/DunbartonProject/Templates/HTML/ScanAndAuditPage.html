@@ -1,0 +1,346 @@
+{% extends 'HTML/Base.html' %}
+{% load crispy_forms_tags %}
+{% block maincontentblock %}
+<div class="AuditScanArea container-fluid">
+  <div class="row h-100 AuditScanAreaRow container-fluid">
+    <div class="col-5 AuditNonLoadAreaDiv container-fluid">
+      <hr>
+      <p class="AuditLeftHandSideText">Audit Form</p>
+      <hr>
+      <div class="AuditWorkOrderTableDiv container" id="AuditWorkOrderTableDiv">
+        <div class="AuditWorkOrderStagingAreaTables container" id="AuditWorkOrderStagingAreaTables">
+          <table class="table AuditTable">
+            <tr class="TableHeader">
+              <td class="HeaderCellLeft table-light">Work Order</td>
+              <td class="HeaderCellRight table-light">Load Area</td>
+            </tr>
+            <tr>
+              <td class="WONcell table-primary">
+                <div class="WorkOrderNumberAuditTable" id="WorkOrderNumberAuditTable"></div>
+              </td>
+              <td class="LoadAreaCell table-primary">
+                <div class="LoadAreaAuditTable" id="LoadAreaCell"></div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="AuditAutomaticWorkOrderScanDiv container-fluid" style="padding-left:0px;padding-right:0%;">
+          <div class="AuditFocussedArea" id="AuditFocussedArea" style="">
+            <input class="AuditScanInput" type="text" onkeydown="GetWorkOrderNumber(event)" name="" value="" id="AuditScanInput">
+          </div>
+          <div class="AuditAutomaticScanButtonDiv" style="padding-right:0px;padding-left:0px;">
+            <button type="button" class="btn btn-block btn-secondary AuditScanButton" style="font-size: 1vw;" id="AuditScanButton" onclick="set_focus">Scan</button>
+          </div>
+      </div>
+      <div class="AuditManualWorkOrderNumberDiv container-fluid">
+        <form class="form-inline">
+          <div class="form-group row" style="margin-left:0px;margin-right:0px">
+            <div class="col-9" style="padding-left:0px;padding-right:1%;">
+              <input type="text" class="form-control AuditAddManualWONInput" id="AuditAddManualWONInput" placeholder="Enter Work Order Number">
+            </div>
+            <div class="col-3" style="padding-right:0px;padding-left:0px;">
+              <button type="button" class="btn btn-sm btn-secondary AuditAddManualWONbutton" id = "AuditAddManualWONbutton" onclick="AddWonManually()">Add</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-7 AuditLoadAreaDiv container-fluid">
+    <div class="AuditStagingAreaBoxes">
+      <div class="AuditStagingAreaTables" id="AuditStagingAreaTables">
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); id="1A" onclick="AuditAddLoadAreaFunction('Load Area 1A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 1A</p>
+                </a>
+                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Load Area 1A</button> -->
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 1B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 1B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 2A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 2A</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 2B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 2B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 3A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 3A</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 3B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 3B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 4A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 4A</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AAuditddLoadAreaFunction('Load Area 4B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 4B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 5A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 5A</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 5B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 5B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 6A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 6A</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 6B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 6B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 7A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 7A</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 7B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 7B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 8A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 8A</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 8B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 8B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 9A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 9A</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 9B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 9B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 10A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 10A</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 10B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 10B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 11A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 11A</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 11B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 11B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 12A')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 12A</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Load Area 12B')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Load Area 12B</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Auxillary Area A 1')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Auxillary Area A 1</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Auxillary Area A 2')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Auxillary Area A 2</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 100%;">
+          <tr>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Auxillary Area B 1')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Auxillary Area B 1</p>
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="AuditStagingAreaBoxDiv">
+                <a href=javascript:void(0); onclick="AuditAddLoadAreaFunction('Auxillary Area B 2')" target="_blank" style="color: inherit;text-decoration:None" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <p class="AuditStagingAreaText" style="text-align: center;">Auxillary Area B 2</p>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Enter ID</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'ScanAndAuditPageFunction' %}" role="form" method="post">
+          {% csrf_token %}
+          {% crispy audit_form %}
+        </form
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  user_id = document.getElementsByName('user_id')[0].getAttribute('content')
+  document.getElementById('id_ID').value = user_id
+  text_area = document.getElementById('AuditScanInput')
+  text_area.focus()
+</script>
+
+{% endblock %}

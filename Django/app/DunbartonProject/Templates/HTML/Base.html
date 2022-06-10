@@ -7,20 +7,30 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
-  <meta name="MetaWon" content="">
-  {% if new_wons %}
-    <meta name="unassigned_wons" content="{{new_wons}}">
-  {% else %}
-    <meta name="unassigned_wons" content="">
-  {% endif %}
   {% if employee_id %}
     <meta name="user_id" content="{{employee_id}}">
   {% else %}
     <meta name="user_id" content="">
   {% endif %}
+  {% if all_unassigned_wons %}
+    <meta name="all_unassigned_wons" content="{{all_unassigned_wons}}">
+  {% else %}
+    <meta name="all_unassigned_wons" content="">
+  {% endif %}
+  {% if non_painted_wons %}
+    <meta name="non_painted_wons" content="{{non_painted_wons}}">
+  {% else %}
+    <meta name="non_painted_wons" content="">
+  {% endif %}
+  {% if painted_wons %}
+    <meta name="painted_wons" content="{{painted_wons}}">
+  {% else %}
+    <meta name="painted_wons" content="">
+  {% endif %}
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
   <link rel="stylesheet" type="text/css" href="{% static 'CSS/Base.css'%}" />
-  <link rel="stylesheet" type="text/css" href="{% static 'CSS/ScanPage.css'%}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/ScanAndAssignPage.css'%}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/ScanAndAuditPage.css'%}" />
   <title>Dunbarton</title>
 </head>
 
@@ -29,7 +39,7 @@
     <div class="NavbarDiv">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <a href="#" class="navbar-brand">
+          <a href="{% url 'ScanAndAssignPageFunction' %}" class="navbar-brand">
             <img class="img-fluid BrandImage" src="{% static 'Images/BrandImage.png' %}">
           </a>
           <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -37,8 +47,8 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
-              <li class="nav-item"><a href="#" class="nav-item nav-link">Scan</a></li>
-              <li class="nav-item"><a href="#" class="nav-item nav-link">Report</a></li>
+              <li class="nav-item"><a href="{% url 'ScanAndAssignPageFunction' %}" class="nav-item nav-link">Scan</a></li>
+              <li class="nav-item"><a href="{% url 'ScanAndAuditPageFunction' %}" class="nav-item nav-link">Report</a></li>
             </div>
           </div>
         </div>
@@ -55,7 +65,8 @@
     </div>
   </div>
   <!-- ##################################### Bootstrap Javascripts ##################################################### -->
-  <script type="text/javascript" src="{% static 'Javascript/ScanPage.js'%}"></script>
+  <script type="text/javascript" src="{% static 'Javascript/ScanAndAssignPage.js'%}"></script>
+  <script type="text/javascript" src="{% static 'Javascript/ScanAndAuditPage.js'%}"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
